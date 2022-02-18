@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/movies/bloc/latest_movie_bloc.dart';
@@ -9,9 +10,10 @@ import 'package:movieapp/movies/repository/movie_repository.dart';
 import 'package:movieapp/movies/ui/movie_home.dart';
 
 void main() {
-  final movieRepository = MovieRepository();
+  final _dio = Dio();
+  final _movieRepository = MovieRepository(dio: _dio);
   runApp(MyApp(
-    movieRepository: movieRepository,
+    movieRepository: _movieRepository,
   ));
 }
 
