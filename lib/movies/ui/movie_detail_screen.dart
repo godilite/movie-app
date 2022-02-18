@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/movies/bloc/movie_detail_bloc.dart';
+import 'package:movieapp/movies/repository/movie_repository.dart';
 import 'package:movieapp/movies/ui/widgets/loading_widget.dart';
 
 class MovieDetailScreen extends StatelessWidget {
@@ -16,8 +17,9 @@ class MovieDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          MovieDetailBloc(id: movieId)..add(const MovieDetailEvent.load()),
+      create: (context) => MovieDetailBloc(
+          id: movieId, repository: context.read<MovieRepository>())
+        ..add(const MovieDetailEvent.load()),
       child: Scaffold(
         body: Container(
           color: Colors.white,

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movieapp/movies/models/movie_response.dart';
-import 'package:movieapp/movies/repository/movie_repo_impl.dart';
+import 'package:movieapp/movies/repository/movie_repository.dart';
 part 'popular_movie_bloc.freezed.dart';
 
 @freezed
@@ -22,12 +22,14 @@ class PopularMovieEvent with _$PopularMovieEvent {
 }
 
 class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
-  PopularMovieBloc() : super(const PopularMovieState.loading()) {
+  PopularMovieBloc({required MovieRepository repository})
+      : _repository = repository,
+        super(const PopularMovieState.loading()) {
     on<PopularMovieEventLoad>(_onMovieLoadPopular);
     on<PopularMovieEventExpand>(_onExpand);
   }
 
-  final _repository = MovieRepoImpl();
+  final MovieRepository _repository;
 
   StreamController<bool> expansionController = StreamController();
 

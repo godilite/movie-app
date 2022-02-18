@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movieapp/movies/models/movie_response.dart';
-import 'package:movieapp/movies/repository/movie_repo_impl.dart';
+import 'package:movieapp/movies/repository/movie_repository.dart';
 part 'upcoming_movie_bloc.freezed.dart';
 
 @freezed
@@ -22,14 +22,16 @@ class UpcomingMovieEvent with _$UpcomingMovieEvent {
 }
 
 class UpcomingMovieBloc extends Bloc<UpcomingMovieEvent, UpcomingMovieState> {
-  UpcomingMovieBloc() : super(const UpcomingMovieState.loading()) {
+  UpcomingMovieBloc({required MovieRepository repository})
+      : _repository = repository,
+        super(const UpcomingMovieState.loading()) {
     on<UpcomingMovieEventLoad>(_onMovieLoadUpcoming);
     on<UpcomingMovieEventExpand>(_onExpand);
   }
 
-  final _repository = MovieRepoImpl();
+  final MovieRepository _repository;
 
-  StreamController<bool> expansionController = StreamController();
+  final StreamController<bool> expansionController = StreamController();
 
   void _onMovieLoadUpcoming(
       UpcomingMovieEventLoad event, Emitter<UpcomingMovieState> emit) async {

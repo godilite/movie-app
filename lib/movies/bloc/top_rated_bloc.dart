@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movieapp/movies/models/movie_response.dart';
-import 'package:movieapp/movies/repository/movie_repo_impl.dart';
+import 'package:movieapp/movies/repository/movie_repository.dart';
 part 'top_rated_bloc.freezed.dart';
 
 @freezed
@@ -22,14 +22,16 @@ class TopRatedMovieEvent with _$TopRatedMovieEvent {
 }
 
 class TopRatedMovieBloc extends Bloc<TopRatedMovieEvent, TopRatedMovieState> {
-  TopRatedMovieBloc() : super(const TopRatedMovieState.loading()) {
+  TopRatedMovieBloc({required MovieRepository repository})
+      : _repository = repository,
+        super(const TopRatedMovieState.loading()) {
     on<TopRatedMovieEventLoad>(_onMovieLoadTopRated);
     on<TopRatedMovieEventExpand>(_onExpand);
   }
 
-  final _repository = MovieRepoImpl();
+  final MovieRepository _repository;
 
-  StreamController<bool> expansionController = StreamController();
+  final StreamController<bool> expansionController = StreamController();
 
   void _onMovieLoadTopRated(
       TopRatedMovieEventLoad event, Emitter<TopRatedMovieState> emit) async {
