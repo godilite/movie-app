@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => MovieRepository(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Movie App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

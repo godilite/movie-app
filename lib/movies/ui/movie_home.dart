@@ -38,9 +38,13 @@ class MovieHome extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: ExpansionTile(
                         initiallyExpanded: true,
+                        iconColor: Colors.black,
                         title: const PanelHeader(title: 'Latest Movies'),
                         onExpansionChanged: (isExpanded) => context
                             .read<LatestMovieBloc>()
@@ -52,10 +56,15 @@ class MovieHome extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 10),
                     Container(
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: ExpansionTile(
                         initiallyExpanded: true,
+                        iconColor: Colors.black,
                         title: const PanelHeader(title: 'Popular Movies'),
                         onExpansionChanged: (isExpanded) => context
                             .read<PopularMovieBloc>()
@@ -67,10 +76,15 @@ class MovieHome extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 10),
                     Container(
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: ExpansionTile(
-                        initiallyExpanded: true,
+                        initiallyExpanded: false,
+                        iconColor: Colors.black,
                         title: const PanelHeader(title: 'Top Rated Movies'),
                         onExpansionChanged: (isExpanded) => context
                             .read<TopRatedMovieBloc>()
@@ -82,10 +96,15 @@ class MovieHome extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 10),
                     Container(
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: ExpansionTile(
-                        initiallyExpanded: true,
+                        initiallyExpanded: false,
+                        iconColor: Colors.black,
                         title: const PanelHeader(title: 'Upcomming Movies'),
                         onExpansionChanged: (isExpanded) => context
                             .read<UpcomingMovieBloc>()
