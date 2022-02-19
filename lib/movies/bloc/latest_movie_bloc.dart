@@ -63,7 +63,7 @@ class LatestMovieBloc extends Bloc<LatestMovieEvent, LatestMovieState> {
 
   //Polling Handler to refresh data every 30 seconds
   void _onRefreshData() {
-    _tickerSubscription ??= _ticker.tick(ticks: _seconds).listen((val) async {
+    _tickerSubscription ??= _ticker.tick(ticks: _seconds).listen((_) async {
       add(const LatestMovieEventLoad());
     });
   }
